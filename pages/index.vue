@@ -34,13 +34,21 @@
                 {{ item.author }}
               </p>
               <v-spacer />
-              <v-btn small outline round color="yellow">
+              <v-btn small outline round color="yellow" @click="readMore(item)">
                 Read
               </v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
-        <v-btn class="mx-auto black--text" color="yellow">
+      </v-layout>
+      <v-layout row wrap>
+        <v-btn
+          :loading="loading"
+          :disabled="loading"
+          class="mx-auto black--text"
+          color="yellow"
+          @click="loadMore()"
+        >
           Berita Lainnya
         </v-btn>
       </v-layout>
@@ -56,7 +64,8 @@ export default {
     return {
       allPost: [],
       posts: [],
-      current: 9
+      current: 9,
+      loading: false
     }
   },
   mounted() {
@@ -73,6 +82,21 @@ export default {
         }
       })
     })
+  },
+  methods: {
+    loadMore() {
+      this.loading = true
+      setTimeout(() => {
+        this.posts = []
+        this.current += 9
+        this.allPost.map((item, key) => item.description !== null && this.posts.length < this.current ? this.posts.push(item) : '')
+        this.loading = false
+      }, 3000)
+    },
+    readMore(data) {
+      this.$store.commit('setArticle', data)
+      this.$router.replace({ 'path': '/detail' })
+    }
   }
 }
 </script>
