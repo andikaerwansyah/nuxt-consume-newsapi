@@ -25,6 +25,12 @@
             {{ article.content }}
           </p>
         </v-flex>
+        <v-btn round :href="article.url" target="_blank" class="yellow--text mx-auto text-none" color="blue-grey darken-3">
+          Lanjutkan Membaca
+          <v-icon right>
+            mdi-open-in-new
+          </v-icon>
+        </v-btn>
       </v-layout>
     </v-container>
   </div>

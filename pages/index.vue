@@ -2,16 +2,21 @@
   <div>
     <hero />
     <v-container grid-list-md>
-      <v-layout column wrap v-if="initLoading === true" justify-center align-center>
-        <v-progress-circular
-          indeterminate
-          color="yellow"
-        />
+      <v-layout v-if="initLoading" column wrap justify-center align-center>
+        <v-avatar
+          size="38px"
+          color="white"
+        >
+          <v-progress-circular
+            indeterminate
+            color="yellow darken-3"
+          />
+        </v-avatar>
         <p class="body-2">
           Menghimpun berita..
         </p>
       </v-layout>
-      <v-layout row wrap v-if="initLoading === false">
+      <v-layout v-if="!initLoading" row wrap>
         <v-flex xs12>
           <h1 class="title mb-2 font-weight-light">
             Berita Teknologi Terkini
@@ -62,27 +67,33 @@
       </v-layout>
       <v-layout row wrap>
         <v-btn
+          v-if="initLoading === false"
           :loading="loading"
           :disabled="loading"
-          class="mx-auto black--text"
+          round
+          class="mx-auto black--text text-none"
           color="yellow"
           @click="loadMore()"
-          v-if="initLoading === false"
         >
           Berita Lainnya
         </v-btn>
       </v-layout>
-      <v-btn
-        fixed
-        dark
-        fab
-        bottom
-        right
-        color="yellow"
-        @click="$vuetify.goTo(0, goToOptions)"
-      >
-        <v-icon color="black">mdi-chevron-up</v-icon>
-      </v-btn>
+      <v-fab-transition>
+        <v-btn
+          v-show="this.$store.state.showFabButton"
+          fixed
+          dark
+          fab
+          bottom
+          right
+          color="yellow"
+          @click="$vuetify.goTo(0, goToOptions)"
+        >
+          <v-icon color="black">
+            mdi-chevron-up
+          </v-icon>
+        </v-btn>
+      </v-fab-transition>
     </v-container>
   </div>
 </template>
@@ -107,8 +118,10 @@ export default {
         offset: 64,
         easing: 'easeInOutCubic'
       }
-
     }
+  },
+  computed: {
+    showHideFabButton() { return this.$store.state.showFabButton }
   },
   async mounted() {
     this.initLoading = true

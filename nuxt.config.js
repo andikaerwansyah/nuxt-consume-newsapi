@@ -1,5 +1,4 @@
 import VuetifyLoaderPlugin from 'vuetify-loader/lib/plugin'
-import pkg from './package'
 
 export default {
   mode: 'universal',
@@ -8,18 +7,23 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: 'NewsAPI x Nuxt | Berita Teknologi',
+    title: 'Indonesian Tech News | Berita Teknologi',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: 'Kumpulan berita seputar teknologi baik dalam maupun luar negeri, Powered By Newsapi.org.' },
+      { name: 'theme-color', content: '#FFEB3B' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
         href:
-          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
+          'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700'
+      },
+      {
+        rel: 'stylesheet',
+        href: 'https://fonts.googleapis.com/css?family=Gugi'
       }
     ]
   },
