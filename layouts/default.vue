@@ -1,12 +1,36 @@
 <template>
   <v-app class="black" dark>
+    <!-- ==Toolbar Desktop=== -->
     <v-toolbar
       fixed
       :flat="flat"
       :color="color"
       clipped-left
+      class="hidden-sm-and-down"
     >
       <v-toolbar-title id="toolbar-title" class="white--text font-weight-light" v-text="title" />
+      <v-spacer />
+      <v-btn
+        flat
+        class="text-none"
+        color="yellow darken-1"
+        href="https://github.com/andikaerwansyah/nuxt-consume-newsapi"
+        target="_blank"
+      >
+        <v-icon left>
+          mdi-github-circle
+        </v-icon>
+        GitHub
+      </v-btn>
+    </v-toolbar>
+    <!-- ===Toolbar Mobile=== -->
+    <v-toolbar
+      app
+      fixed
+      clipped-left
+      class="hidden-md-and-up"
+    >
+      <v-toolbar-title id="toolbar-title" class="subheading white--text font-weight-light" v-text="title" />
       <v-spacer />
       <v-btn
         flat
