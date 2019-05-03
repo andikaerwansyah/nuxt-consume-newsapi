@@ -1,10 +1,22 @@
 <template>
   <div>
+    <hero />
     <v-container grid-list-md>
-      <h1 class="title mb-2 font-weight-light">
-        Berita Teknologi Terkini
-      </h1>
-      <v-layout row wrap>
+      <v-layout column wrap v-if="initLoading === true" justify-center align-center>
+        <v-progress-circular
+          indeterminate
+          color="yellow"
+        />
+        <p class="body-2">
+          Menghimpun berita..
+        </p>
+      </v-layout>
+      <v-layout row wrap v-if="initLoading === false">
+        <v-flex xs12>
+          <h1 class="title mb-2 font-weight-light">
+            Berita Teknologi Terkini
+          </h1>
+        </v-flex>
         <v-flex v-for="item in posts" :key="item.key" xs12 sm6 md4>
           <v-card id="news-card-bra" class="flexcard" height="100%">
             <v-img
@@ -24,7 +36,7 @@
             </v-img>
             <v-card-text class="grow">
               <div>
-                <p class="text-truncate">
+                <p>
                   {{ item.description }}
                 </p>
               </div>
@@ -34,8 +46,15 @@
                 {{ item.author }}
               </p>
               <v-spacer />
-              <v-btn small outline round color="yellow" @click="readMore(item)">
-                Read
+              <v-btn
+                class="text-none"
+                small
+                outline
+                round
+                color="yellow"
+                @click="readMore(item)"
+              >
+                Selengkapnya
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -48,28 +67,52 @@
           class="mx-auto black--text"
           color="yellow"
           @click="loadMore()"
+          v-if="initLoading === false"
         >
           Berita Lainnya
         </v-btn>
       </v-layout>
+      <v-btn
+        fixed
+        dark
+        fab
+        bottom
+        right
+        color="yellow"
+        @click="$vuetify.goTo(0, goToOptions)"
+      >
+        <v-icon color="black">mdi-chevron-up</v-icon>
+      </v-btn>
     </v-container>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import Hero from '../components/Hero'
 
 export default {
+  components: {
+    Hero
+  },
   data() {
     return {
       allPost: [],
       posts: [],
       current: 9,
-      loading: false
+      loading: false,
+      initLoading: false,
+      goToOptions: {
+        duration: 500,
+        offset: 64,
+        easing: 'easeInOutCubic'
+      }
+
     }
   },
-  mounted() {
-    axios(
+  async mounted() {
+    this.initLoading = true
+    await axios(
       'https://newsapi.org/v2/top-headlines?country=id&category=technology&apiKey=ff3a13d653734a80b690b3c4938f29a3',
       {
         crossDomain: true
@@ -82,6 +125,7 @@ export default {
         }
       })
     })
+    this.initLoading = false
   },
   methods: {
     loadMore() {
@@ -95,7 +139,7 @@ export default {
     },
     readMore(data) {
       this.$store.commit('setArticle', data)
-      this.$router.replace({ 'path': '/detail' })
+      this.$router.push({ 'path': '/detail' })
     }
   }
 }

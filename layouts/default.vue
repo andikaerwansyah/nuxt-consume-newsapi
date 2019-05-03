@@ -1,33 +1,41 @@
 <template>
-  <v-app dark>
+  <v-app class="black" dark>
     <v-toolbar
       fixed
       app
       clipped-left
     >
-      <v-avatar
-        size="42px"
-        tile
-      >
-        <img src="https://pbs.twimg.com/profile_images/942571181051400192/rudqtcNK_400x400.jpg" alt="alt">
-      </v-avatar>
-      <v-toolbar-title v-text="title" />
+      <v-toolbar-title class="white--text font-weight-light" v-text="title" />
       <v-spacer />
-      <v-btn flat class="text-none" color="yellow">
-        <v-icon left>mdi-github-circle</v-icon>
+      <v-btn
+        flat
+        class="text-none"
+        color="yellow darken-1"
+        href="https://github.com/andikaerwansyah/nuxt-consume-newsapi"
+        target="_blank"
+      >
+        <v-icon left>
+          mdi-github-circle
+        </v-icon>
         GitHub
       </v-btn>
     </v-toolbar>
     <v-content>
-      <v-container>
-        <nuxt />
-      </v-container>
+      <nuxt />
     </v-content>
     <v-footer
-      :fixed="fixed"
+      fixed
       app
     >
-      <span class="ml-2">Powered By <a id="footer" href="https://newsapi.org/">Newsapi.org</a> &copy; 2019</span>
+      <p class="mx-auto mb-0">
+        <v-icon small color="yellow">
+          mdi-flash
+        </v-icon>
+        Powered By
+        <a class="footer" href="https://newsapi.org/">Newsapi.org</a>
+        &
+        <a class="footer" href="https://vuetifyjs.com/en/">Vuetifyjs.com</a>
+      </p>
     </v-footer>
   </v-app>
 </template>
@@ -36,32 +44,15 @@
 export default {
   data() {
     return {
-      clipped: false,
-      drawer: false,
-      fixed: false,
-      items: [
-        {
-          icon: 'apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'bubble_chart',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
-      miniVariant: false,
-      right: true,
-      rightDrawer: false,
-      title: 'Nuxt NewsAPI'
+      title: 'ITechNews'
     }
   }
 }
 </script>
 
 <style>
-#footer {
+.footer {
   text-decoration: none;
+  color: white;
 }
 </style>
