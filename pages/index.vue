@@ -47,7 +47,7 @@
               </div>
             </v-card-text>
             <v-card-actions class="pa-3">
-              <p class="caption">
+              <p class="caption text-truncate">
                 {{ item.author }}
               </p>
               <v-spacer />
