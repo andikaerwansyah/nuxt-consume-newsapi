@@ -25,10 +25,10 @@
     </v-toolbar>
     <!-- ===Toolbar Mobile=== -->
     <v-toolbar
-      app
+      :app="$vuetify.breakpoint.smAndDown ? true : false"
       fixed
       clipped-left
-      class="hidden-md-and-up"
+      class="hidden-sm-and-up"
     >
       <v-toolbar-title id="toolbar-title" class="subheading white--text font-weight-light" v-text="title" />
       <v-spacer />
@@ -68,7 +68,7 @@ export default {
     return {
       color: 'transparent',
       flat: true,
-      title: 'IndoTech News'
+      title: 'ITNews'
     }
   },
   mounted() {

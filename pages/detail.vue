@@ -21,6 +21,15 @@
           </p>
         </v-flex>
         <v-flex xs12>
+          <v-layout row wrap>
+            <p>
+              {{ article.source.name }}
+            </p>
+            <v-spacer></v-spacer>
+            <p>
+              {{ article.publishedAt | publishTime }}
+            </p>
+          </v-layout>
           <p>
             {{ article.content }}
           </p>
@@ -37,7 +46,16 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
+  filters: {
+    publishTime: (value) => {
+      if (value) {
+        return moment(String(value)).format('hh:mm DD/MM/YYYY')
+      }
+    }
+  },
   computed: {
     article() { return this.$store.state.article }
   }
