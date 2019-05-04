@@ -25,7 +25,7 @@
             <p>
               {{ article.source.name }}
             </p>
-            <v-spacer></v-spacer>
+            <v-spacer />
             <p>
               {{ article.publishedAt | publishTime }}
             </p>
